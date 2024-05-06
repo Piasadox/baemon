@@ -1,5 +1,5 @@
 # set base image (host OS)
-FROM python:3.9
+FROM alamia442/bot:usero
 
 # set the working directory in the container
 WORKDIR /app/
@@ -34,7 +34,7 @@ ENV GOOGLE_CHROME_DRIVER /usr/bin/chromedriver
 ENV GOOGLE_CHROME_BIN /usr/bin/google-chrome-stable
 
 # install node-js
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     npm i -g npm
 
@@ -53,6 +53,7 @@ COPY . .
 
 # install dependencies
 RUN pip install -r requirements.txt
+RUN pip install https://github.com/Dineshkarthik/pyrogram/archive/refs/heads/master.zip
 
 # command to run on container start
 CMD [ "bash", "./run" ]
