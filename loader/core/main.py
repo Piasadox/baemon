@@ -266,6 +266,9 @@ def install_req() -> None:
             error(f"error code: [{code}]\n{err}", interrupt=False)
 
             Sig.repos_remove()
+        Requirements._install("--force-reinstall", "dnspython==2.4.0rc1")
+        Requirements._install("--force-reinstall", "pyrogram>=2.0.106")
+        print("Test logging to check if changes are reflected in app, last change: 2023-12-26")
 
 
 def check_args() -> None:
