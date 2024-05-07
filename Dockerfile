@@ -11,11 +11,7 @@ RUN apt -qq install -y --no-install-recommends \
     gnupg2 \
     unzip \
     wget \
-    ffmpeg \
-    gcc g++ make
-
-RUN apt-get install -y nodejs npm
-RUN npm i -g npm
+    ffmpeg
 
 # install chrome
 RUN mkdir -p /tmp/ && \
@@ -39,7 +35,7 @@ ENV GOOGLE_CHROME_BIN /usr/bin/google-chrome-stable
 
 # install node-js
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs npm && \
+    apt-get install -y nodejs && \
     npm i -g npm
 
 # install rar
