@@ -1,5 +1,5 @@
 # set base image (host OS)
-FROM alamia442/bot:usero
+FROM python:3.9
 
 # set the working directory in the container
 WORKDIR /app/
@@ -11,7 +11,11 @@ RUN apt -qq install -y --no-install-recommends \
     gnupg2 \
     unzip \
     wget \
-    ffmpeg
+    ffmpeg \
+    gcc g++ make
+
+RUN apt-get install -y nodejs npm
+RUN npm i -g npm
 
 # install chrome
 RUN mkdir -p /tmp/ && \
@@ -34,8 +38,8 @@ ENV GOOGLE_CHROME_DRIVER /usr/bin/chromedriver
 ENV GOOGLE_CHROME_BIN /usr/bin/google-chrome-stable
 
 # install node-js
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs npm && \
     npm i -g npm
 
 # install rar
@@ -53,7 +57,6 @@ COPY . .
 
 # install dependencies
 RUN pip install -r requirements.txt
-RUN pip install https://github.com/Dineshkarthik/pyrogram/archive/refs/heads/master.zip
 
 # command to run on container start
 CMD [ "bash", "./run" ]
